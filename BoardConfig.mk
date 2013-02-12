@@ -1,23 +1,27 @@
 USE_CAMERA_STUB := true
 
-# inherit from common msm8960
--include device/htc/msm8960-common/BoardConfigCommon.mk
-
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := fireball
 
 # Kernel
 BOARD_KERNEL_BASE := 0x80400000
 BOARD_KERNEL_PAGESIZE := 2048
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8
-BOARD_FORCE_RAMDISK_ADDRESS := 0x81800000
-
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01400000
 TARGET_PREBUILT_KERNEL := device/htc/fireball/kernel
-# TARGET_KERNEL_SOURCE := kernel/htc/msm8960
-# TARGET_KERNEL_CONFIG := fireball_defconfig
 
-# Lights
-TARGET_PROVIDES_LIBLIGHTS := true
+# Platform
+TARGET_BOARD_PLATFORM := msm8960
+TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
+
+# Architecture
+TARGET_ARCH := arm
+TARGET_ARCH_VARIANT := armv7-a-neon
+TARGET_ARCH_VARIANT_CPU := cortex-a9
+TARGET_CPU_ABI := armeabi-v7a
+TARGET_CPU_ABI2 := armeabi
+TARGET_CPU_SMP := true
+TARGET_USE_KRAIT_BIONIC_OPTIMIZATION := true
 
 # Filesystem (cat /proc/emmc)
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x01000000
@@ -27,7 +31,7 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x49fffe00
 BOARD_FLASH_BLOCK_SIZE := 131072
 
 # Recovery: set either cwm or twrp
-TARGET_RECOVERY_INITRC := device/htc/fireball/recovery/init-twrp.rc
+TARGET_RECOVERY_INITRC := device/htc/fireball/recovery/init-cwm.rc
 
 # Use power button as select in recovery
 BOARD_HAS_NO_SELECT_BUTTON := true
@@ -47,5 +51,6 @@ TW_INCLUDE_DUMLOCK := true
 
 # Vold
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
+BOARD_VOLD_MAX_PARTITIONS := 36
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
 

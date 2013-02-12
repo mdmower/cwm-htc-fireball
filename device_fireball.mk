@@ -3,9 +3,6 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 # The gps config appropriate for this device
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
 
-# common msm8960 configs
-$(call inherit-product, device/htc/msm8960-common/msm8960.mk)
-
 $(call inherit-product-if-exists, vendor/htc/fireball/fireball-vendor.mk)
 
 DEVICE_PACKAGE_OVERLAYS += device/htc/fireball/overlay
@@ -28,5 +25,4 @@ PRODUCT_COPY_FILES += \
 $(call inherit-product, build/target/product/full.mk)
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
-PRODUCT_NAME := full_fireball
-PRODUCT_DEVICE := fireball
+
